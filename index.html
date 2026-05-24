@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickFix AR | Prototype</title>
+  <!-- Load A-Frame for 3D rendering -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- Load AR.js for camera tracking and marker recognition -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+    #ui-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #00ff00;
+      padding: 10px 20px;
+      border-radius: 8px;
+      z-index: 10;
+      text-align: center;
+      border: 1px solid #00ff00;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Quick UI Overlay for the user -->
+  <div id="ui-overlay">
+    <strong>QuickFix AR</strong><br>
+    Scanning for target...
+  </div>
+
+  <!-- The AR Scene -->
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;">
+    
+    <!-- This dictates what happens when the camera sees the physical marker -->
+    <a-marker preset="hiro">
+      <!-- 3D Box overlay (Can be replaced with a CAD model or tool diagram) -->
+      <a-box position="0 0.5 0" material="color: #ff4500; opacity: 0.8; wireframe: true;"></a-box>
+      
+      <!-- Floating Text overlay -->
+      <a-text 
+        value="Target Locked: \nDiagnostic Mode" 
+        position="-0.75 1.5 0" 
+        color="#ffffff" 
+        scale="1.5 1.5 1.5">
+      </a-text>
+    </a-marker>
+
+    <!-- The user's camera -->
+    <a-entity camera></a-entity>
+    
+  </a-scene>
+
+</body>
+</html>
